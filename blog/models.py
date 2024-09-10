@@ -4,14 +4,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 STATUS = ((0, "Draft"), (1, "Published"))
 
-class Comment(models.Model):
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)  # Ensure you have a Post model defined
-    text = models.TextField()
-    created_at = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return self.text
-
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
@@ -22,3 +14,11 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)
+
+class Comment(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)  # Ensure you have a Post model defined
+    text = models.TextField()
+
+
+    def __str__(self):
+        return self.text
