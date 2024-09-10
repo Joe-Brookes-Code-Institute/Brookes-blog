@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 # Create your models here.
 STATUS = ((0, "Draft"), (1, "Published"))
 
+class Comment(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)  # Ensure you have a Post model defined
+    text = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.text
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
