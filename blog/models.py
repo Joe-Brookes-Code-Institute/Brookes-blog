@@ -30,8 +30,10 @@ class Comment(models.Model):
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
+    challenge = models.SlugField()   
+
     class Meta:
         ordering = ["created_on"]
-
+       
     def __str__(self):
         return f"Comment {self.body[:30]}... by {self.author.username}"
